@@ -1,0 +1,152 @@
+<app-cabecera></app-cabecera>
+<br />
+<div class="container">
+    <div class="col-md-10 ml-auto mr-auto text-center">
+        <div class="alert alert-success text-justify" role="alert">
+            <h5 align="center">
+                <i class="fas fa-info-circle"></i>
+                <font color="green"> Transferencia a Terceros</font>
+            </h5>
+            <hr />
+            <h6 align="center">
+                <font color="green">Estimado usuario seleccione la cuenta y monto a transferir.</font>
+            </h6>
+        </div>
+    </div>
+
+    <div class="col-md-10 ml-auto mr-auto text-center">
+        <hr />
+
+        <form #forma="ngForm" novalidate="">
+            <div class="card">
+                <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                    <ng-container *ngIf="!resultado">
+                        <h4>Trasferencia</h4>
+                    </ng-container>
+                    <ng-container *ngIf="resultado">
+                        <h4>Transferencia</h4>
+                    </ng-container>
+                </div>
+                <div class="card-body">
+                    <ng-container *ngIf="resultado">
+                        <div class="col-md-10 ml-auto mr-auto text-center">
+                            <i class="fas fa-check-circle fa-7x" style="color: green"></i>
+                            <hr />
+                            <h3 align="center">
+                                Usted ha realizado una transferencia de {{ transferencia.monto| currency: "USD":"symbol":"3.0-0" | lowercase }} en la cuenta de {{cuenta_destino.rut}} cuyo propietario es {{cuenta_destino.nombre}} y ha quedado con un saldo de
+                                <ng-container *ngFor="let item of data">
+                                    {{ item.saldo | currency: "USD":"symbol":"3.0-0" | lowercase }}
+                                </ng-container>
+                            </h3>
+                            <h5 align="center">
+                                Si desea realizar otra operación, para esto solo debe presionar el boton "Otra operación" que aparece en la pantalla de lo contrario presione "Salir del Sitema".
+                            </h5>
+                            <hr />
+                            <a class="btn btn-outline-primary w-50" [routerLink]="['/operaciones']">
+                Otra operación</a>
+                            <a class="btn btn-outline-danger w-50" [routerLink]="['/home']">
+                Salir del Sistema</a>
+                        </div>
+                    </ng-container>
+                    <hr />
+                    <ng-container *ngIf="!resultado">
+                        
+                        <div class="form-group row text-center">
+                            <div class="container">
+                                <i class="fas fa-info-circle fa-5x" style="color: blue"></i>
+                                <hr />
+                                <h5>
+                                    Su saldo es de
+                                    <ng-container *ngFor="let item of data">
+                                        {{ item.saldo | currency: "USD":"symbol":"3.0-0" | lowercase }}
+                                    </ng-container>
+                                </h5>
+
+                                <h5>
+                                    Recuerde que en este banco solo puede depositar dinero de un monto igual o superior a $1,000.
+                                </h5>
+                            </div>
+                        </div>
+
+                        <hr />
+                      
+                        <ng-container *ngIf="nombre.valid">
+                            <div class="form-group row text-center">
+                                <div class="container">    
+                             <h6> Transferencia para {{cuenta_destino.nombre}} </h6>
+                            </div>
+                        </div>
+                            <hr/>
+                            </ng-container>
+                    
+                        <div class="form-group row">
+                            <label class="col-sm col-form-label">Seleccione cuenta de destino *</label>
+                            <div class="col-md-8">
+                                <ng-autocomplete
+    [data]="data$ | async"
+    [searchKeyword]="keyword"
+    [itemTemplate]="itemTemplate"
+    (selected)='selectEvent($event)'
+    (inputChanged)='cambioSelect($event)'
+    [notFoundTemplate]="notFoundTemplate"
+    placeholder="Introduzca el rut"
+  >
+  </ng-autocomplete>
+
+  <ng-template #itemTemplate let-item>
+    <a [innerHTML]="item.rut"></a>  <a [innerHTML]="item.nombre"></a>
+  </ng-template>
+
+  <ng-template #notFoundTemplate let-notFound>
+    <div [innerHTML]="notFound"></div>
+  </ng-template>
+               
+        
+  <input type="hidden" [(ngModel)]="cuenta_destino.nombre" minlength="4" name="nombre" #nombre="ngModel" required>
+  <div *ngIf="nombre.invalid">
+    <font color="red">* No ha seleccionado ninguna cuenta existente al sistema.</font>
+</div>                            
+</div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm col-form-label">Monto a trasferir *</label>
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-primary" type="button" disabled>
+                      <i class="fas fa-dollar-sign"></i>
+                    </button>
+                                    </div>
+                                    <input class="form-control" type="number" [(ngModel)]="transferencia.monto" minlength="4" name="monto" pattern="^[1-9][0-9]{3,15}$" placeholder="//0000//" #saldo="ngModel" required />
+
+                                    <div *ngIf="saldo.invalid">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-danger" type="button" disabled>
+                        <i class="fas fa-times-circle"></i>
+                      </button>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="saldo.valid">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-success" type="button">
+                        <i class="fas fa-check-square"></i>
+                      </button> </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="saldo.invalid">
+                                    <font color="red">* debe poner un monto igual o superior a $1,000.</font>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <button [disabled]="!forma.valid" (click)="transferir_dinero()" class="btn btn-outline-primary w-50">
+              Transferir    <i class="fas fa-file-invoice-dollar"></i>
+            </button>
+                        <a class="btn btn-outline-danger w-50" [routerLink]="['/operaciones']">
+              Volver &nbsp;<i class="fas fa-university"></i></a>
+                    </ng-container>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

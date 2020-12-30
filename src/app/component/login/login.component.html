@@ -1,0 +1,76 @@
+<br/>
+<div class="container">
+    <div class="col-md-8 ml-auto mr-auto text-center">
+        <div class="alert alert-success text-justify" role="alert">
+            <h5 align="center">
+                <i class="fas fa-info-circle"></i>
+                <font color="green"> Sistema de cuenta Banacario Test Implementos.</font>
+            </h5>
+            <hr />
+            <h6 align="center">
+                <i class="fas fa-info-circle"></i>
+                <font color="green">Desarrollado por Sebastian Aracena Aguirre.</font>
+            </h6>
+        </div>
+    </div>
+
+    <div class="col-md-8 ml-auto mr-auto text-center">
+        <form #forma="ngForm" novalidate="">
+            <div class="card text-center">
+                <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                    <h3 class="mb-3 font-weight-normal">
+                        Login <i class="fas fa-sign-in-alt"></i>
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="text-center">
+                        <img class="mb-4" src="./assets/img/login.png" alt="" width="25%" height="25%" />
+                    </div>
+
+                    <h4 class="mb-3 font-weight-normal">
+                        Ingrese su <strong>rut </strong>y <strong>contraseña</strong> utilizar funciones del sistema.
+                    </h4>
+                    <hr />
+
+                    <div class="form-group row">
+                        <label class="col-sm">Rut:</label>
+                        <div class="col-md-8">
+                            <input type="text" [(ngModel)]="rut" name="rut" class="form-control" placeholder="//16091211-1//" pattern="^[0-9]+[-|‐]{1}[0-9kK]{1}$" required #nombre="ngModel" />
+                        </div>
+                        <div class="col-md-12 form-control-feedback" *ngIf="nombre.errors?.pattern">
+                            <br />
+                            <div class="alert alert-danger" role="alert">
+                                <div align="center">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <font color="red">
+                                        Rut ha sido ingresado de forma incorrecta, favor siguir el formato <strong>16091276-k</strong>
+                                    </font>
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm">Contraseña:</label>
+                        <div class="col-md-8">
+                            <input type="password" [(ngModel)]="password" name="password" class="form-control" placeholder="Ingrese Contraseña" #passwd="ngModel" required />
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="checkbox mb-3"></div>
+                    <button [disabled]="!forma.valid" (click)="login()" class="btn btn-lg btn-outline-success w-50" type="submit">
+          <i class="fas fa-sign-in-alt"></i> Login
+        </button>
+                    <button (click)="create_user()" class="btn btn-lg btn-outline-primary w-50" type="submit">
+          <i class="fas fa-address-book"></i> Crear Cuenta
+        </button>
+                    <hr />
+                    <font class="mt-5 mb-3 text-muted text-center">&copy; 2014-2020</font>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

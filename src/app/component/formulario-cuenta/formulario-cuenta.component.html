@@ -1,0 +1,203 @@
+<br/>
+<div class="container">
+    <div class="col-md-10 ml-auto mr-auto text-center">
+        <div class="alert alert-success text-justify" role="alert">
+            <h5 align="center">
+                <i class="fas fa-info-circle"></i>
+                <font color="green"> Sistema de cuenta Banacario Test Implementos.</font>
+            </h5>
+            <hr />
+            <h6 align="center">
+                <i class="fas fa-info-circle"></i>
+                <font color="green">Desarrollado por Sebastian Aracena Aguirre.</font>
+            </h6>
+        </div>
+    </div>
+
+    <div class="col-md-10 ml-auto mr-auto text-center">
+        <hr />
+
+        <form #forma="ngForm" novalidate="">
+            <div class="card">
+                <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                    <ng-container *ngIf="!resultado">
+                        <h4>Crear Cuenta</h4>
+                    </ng-container>
+                    <ng-container *ngIf="resultado">
+                        <h4>Cuenta Creada</h4>
+                    </ng-container>
+                </div>
+                <div class="card-body">
+                    <ng-container *ngIf="resultado">
+                        <div class="col-md-10 ml-auto mr-auto text-center">
+                            <i class="fas fa-check-circle fa-7x" style="color:green"></i>
+                            <hr/>
+                            <h3 align="center">Su cuenta ha sido creada</h3>
+                            <h5 align="center">Ahora puede utilizar el sistema, para esto solo debe presionar el boton login que aparece en la pantalla.</h5>
+                            <hr/>
+                            <button (click)="login()" class="btn btn-outline-primary w-50">
+                            Login <i class="fas fa-paper-plane"></i>
+                          </button>
+                        </div>
+                    </ng-container>
+                    <hr />
+                    <ng-container *ngIf="!resultado">
+                        <div class="form-group row">
+                            <label class="col-sm col-form-label">Rut *</label>
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <input class="form-control" type="text" [(ngModel)]="cuenta.rut" minlength="10" maxlength="10" name="rut" placeholder="//16091211-1//" pattern="^[0-9]+[-|‐]{1}[0-9kK]{1}$" #rut="ngModel" required />
+
+                                    <div *ngIf="rut.invalid">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-danger" type="button" disabled>
+                      <i class="fas fa-times-circle"></i>
+                    </button>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="rut.valid">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-success" type="button">
+                      <i class="fas fa-check-square"></i>
+                    </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="rut.invalid">
+                                    <font color="red">* rut invalido anotar rut sin '.' solo con guion</font>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm col-form-label">Nombre *</label>
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <input class="form-control" type="text" [(ngModel)]="cuenta.nombre" minlength="4" name="nombre" placeholder="//Nombre Completo//" #nombre="ngModel" required />
+
+                                    <div *ngIf="nombre.invalid">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-danger" type="button" disabled>
+                      <i class="fas fa-times-circle"></i>
+                    </button>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="nombre.valid">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-success" type="button">
+                      <i class="fas fa-check-square"></i>
+                    </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="nombre.invalid">
+                                    <font color="red">* nombre es obligatorio</font>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm col-form-label">Correo *</label>
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <input class="form-control" type="text" [(ngModel)]="cuenta.correo" name="correo" placeholder="//email@email.com//" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$" #correo="ngModel" required />
+
+                                    <div *ngIf="correo.invalid">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-danger" type="button" disabled>
+                      <i class="fas fa-times-circle"></i>
+                    </button>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="correo.valid">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-success" type="button">
+                      <i class="fas fa-check-square"></i>
+                    </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="correo.invalid">
+                                    <font color="red">* correo es obligatorio debe estar acompañado con '@' y una extension de nic como por ejemplo '.com'
+                                    </font>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm col-form-label">Contraseña *</label>
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <input class="form-control" type="password" [(ngModel)]="cuenta.password" minlength="6" name="password" #password="ngModel" placeholder="//Ingrese contraseña//" required />
+
+                                    <div *ngIf="password.invalid">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-danger" type="button" disabled>
+                      <i class="fas fa-times-circle"></i>
+                    </button>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="password.valid">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-success" type="button">
+                      <i class="fas fa-check-square"></i>
+                    </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="password.invalid">
+                                    <font color="red">* la contraseña debe tener a lo menos 6 caracteres</font>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm col-form-label">Confirmar contraseña *</label>
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <input class="form-control" type="password" [(ngModel)]="confirmar_passwd" minlength="6" name="confirmar_passwd" #password2="ngModel" placeholder="//Confirme contraseña//" required />
+
+                                    <div *ngIf="password2.invalid">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-danger" type="button" disabled>
+                      <i class="fas fa-times-circle"></i>
+                    </button>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="password2.valid">
+                                        <ng-container *ngIf="password2.value == password.value">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-success" type="button">
+                        <i class="fas fa-check-square"></i>
+                      </button>
+                                            </div>
+                                        </ng-container>
+                                        <ng-container *ngIf="password2.value != password.value">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-danger" type="button" disabled>
+                        <i class="fas fa-times-circle"></i>
+                      </button>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                                <div *ngIf="password2.invalid">
+                                    <font color="red">* la contraseña debe tener a lo menos 6 caracteres</font>
+                                </div>
+                                <ng-container *ngIf="password2.valid">
+                                    <ng-container *ngIf="password2.value != password.value">
+                                        <font color="red">* la contraseña no coincide</font>
+                                    </ng-container>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <hr />
+                        <button [disabled]="!forma.valid" (click)="guardar()" class="btn btn-outline-primary w-50">
+            Enviar <i class="fas fa-paper-plane"></i>
+          </button>
+                    </ng-container>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

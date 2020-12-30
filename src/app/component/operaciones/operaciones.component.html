@@ -1,0 +1,109 @@
+<app-cabecera></app-cabecera>
+<br />
+<div class="container">
+    <div class="col-md-12 ml-auto mr-auto text-center">
+        <div class="alert alert-success text-justify" role="alert">
+            <h5 align="center">
+                <i class="fas fa-info-circle"></i>
+                <font color="green"> Operaciones.</font>
+            </h5>
+            <hr />
+            <h6 align="center">
+                <font color="green">
+                    Estimado Sr/a. <strong>{{ usuario }}</strong>, por favor seleccione alguna operación que quiera realizar.
+                </font>
+            </h6>
+        </div>
+    </div>
+    <div class="col-md-12 ml-auto mr-auto text-center">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card text-center">
+                    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                        <h5><b>Cargar Saldo</b></h5>
+
+                        <button (click)="info_operacion('Cargar Saldo')"class="btn btn-primary">
+              <i class="fas fa-info-circle"></i>
+            </button>
+                    </div>
+
+                    <div class="card-body">
+                        <hr />
+
+                        <div class="ml-auto mr-auto text-center">
+                            <a [routerLink]="[ '/cargar_saldo']"> <i class="fas fa-money-check-alt fa-7x"></i> </a>
+                        </div>
+                        <hr />
+                    </div>
+                </div>
+                <br />
+            </div>
+
+            <div class="col-md-6">
+                <div class="card text-center">
+                    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                        <h5><b>Retiro de Saldo</b></h5>
+
+                        <button (click)="info_operacion('Retirar Saldo')"class="btn btn-primary">
+              <i class="fas fa-info-circle"></i>
+            </button>
+                    </div>
+
+                    <div class="card-body">
+                        <hr />
+
+                        <div class="ml-auto mr-auto text-center">
+                            <a [routerLink]="[ '/retirar_saldo']"> <i class="fas fa-hand-holding-usd fa-7x"></i> </a>
+                        </div>
+                        <hr />
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card text-center">
+                    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                        <h5><b> Transferencia</b></h5>
+
+                        <button (click)="info_operacion('Transferencia')" class="btn btn-primary">
+              <i class="fas fa-info-circle fa"></i>
+            </button>
+                    </div>
+
+                    <div class="card-body">
+                        <hr />
+
+                        <div class="ml-auto mr-auto text-center">
+                            <a [routerLink]="[ '/transferencia']"> <i class="fas fa-exchange-alt fa-7x"></i> </a>
+                        </div>
+                        <hr />
+                    </div>
+                </div>
+                <br />
+            </div>
+            <div class="col-md-6">
+                <div class="card text-center">
+                    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                        <h5><b> Hitorial</b></h5>
+
+                        <button (click)="info_operacion('Historial')" class="btn btn-primary">
+              <i class="fas fa-info-circle fa"></i>
+            </button>
+                    </div>
+
+                    <div class="card-body">
+                        <hr />
+
+                        <div class="ml-auto mr-auto text-center">
+                            <a [routerLink]="[ '/historial']"> <i class="fas fa-file-invoice-dollar fa-7x"></i> </a>
+                        </div>
+                        <hr />
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+    </div>
+</div>

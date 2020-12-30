@@ -1,0 +1,128 @@
+<app-cabecera></app-cabecera>
+<br />
+<div class="container">
+  <h4 align="center">Historial</h4>
+  <hr />
+  <h5>
+    Su saldo es de
+    <ng-container *ngFor="let item of data">
+      {{ item.saldo | currency: "USD":"symbol":"3.0-0" | lowercase }}
+    </ng-container>
+  </h5>
+  <hr />
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a
+        class="nav-link active"
+        id="origen-tab"
+        data-toggle="tab"
+        href="#transaccion"
+        role="tab"
+        aria-controls="home"
+        aria-selected="true"
+        >Carga de saldo y Transferencias salientes</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        id="destino-tab"
+        data-toggle="tab"
+        href="#transferencia"
+        role="tab"
+        aria-controls="profile"
+        aria-selected="false"
+        >Transferencia entrantes</a
+      >
+    </li>
+  </ul>
+  <hr />
+  <div class="tab-content" id="myTabContent">
+    <div
+      class="tab-pane fade show active"
+      id="transaccion"
+      role="tabpanel"
+      aria-labelledby="home-tab"
+    >
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Operación</th>
+            <th scope="col">Monto</th>
+            <th scope="col">Saldo Restante</th>
+            <th scope="col">Cuenta_destino</th>
+            <th scope="col">Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let item of origen">
+            <tr>
+              <td>{{ item.tipo }}</td>
+              <td>
+                {{ item.monto | currency: "USD":"symbol":"3.0-0" | lowercase }}
+              </td>
+              <td>
+                {{ item.saldo | currency: "USD":"symbol":"3.0-0" | lowercase }}
+              </td>
+              <ng-container *ngIf="item.cuenta_destino == 'No aplica'">
+                <td>-</td>
+              </ng-container>
+              <ng-container *ngIf="item.cuenta_destino != 'No aplica'">
+                <td>{{ item.cuenta_destino }}</td>
+              </ng-container>
+              <td>{{ item.fecha | date: "dd/MM/yyyy h:mm:ss a" }}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="transferencia"
+      role="tabpanel"
+      aria-labelledby="profile-tab"
+    >
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Operación</th>
+            <th scope="col">Monto</th>
+            <th scope="col">Saldo Restante</th>
+            <th scope="col">Cuenta origen</th>
+            <th scope="col">Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let item of destino">
+            <tr>
+              <td>{{ item.tipo }}</td>
+              <td>
+                {{ item.monto | currency: "USD":"symbol":"3.0-0" | lowercase }}
+              </td>
+              <td>
+                {{
+                  item.saldo_trans_entrante
+                    | currency: "USD":"symbol":"3.0-0"
+                    | lowercase
+                }}
+              </td>
+
+              <td>{{ item.cuenta_origen }}</td>
+
+              <td>{{ item.fecha | date: "dd/MM/yyyy h:mm:ss a" }}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <hr />
+  <div class="col-md-8 ml-auto mr-auto text-center">
+    <a class="btn btn-outline-primary w-50" [routerLink]="['/operaciones']">
+      Otra operación</a
+    >
+    <a class="btn btn-outline-danger w-50" [routerLink]="['/home']">
+      Salir del Sistema</a
+    >
+  </div>
+</div>
