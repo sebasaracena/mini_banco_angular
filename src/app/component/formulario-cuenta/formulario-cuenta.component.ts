@@ -46,6 +46,6 @@ export class FormularioCuentaComponent implements OnInit {
   }
 
   login(){
-   this.route.navigate(['/login']);
+   this.route.navigate(['/home']);
   }
 }
