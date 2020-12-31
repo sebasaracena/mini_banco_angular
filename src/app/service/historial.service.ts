@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
   providedIn: "root",
 })
 export class HistorialService {
-  API_URL = "http://localhost:8080";
+  API_URL = "http://146.83.102.99:8081";
   constructor(private http: HttpClient) {}
 
   //funciones para realizar el historial

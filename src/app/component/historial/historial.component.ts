@@ -5,6 +5,7 @@ import { HistorialService } from "../../service/historial.service";
 import { Observable } from "rxjs";
 import { ThrowStmt } from "@angular/compiler";
 import { CuentaService } from "../../service/cuenta.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-historial",
@@ -27,15 +28,14 @@ export class HistorialComponent implements OnInit {
 
   ngOnInit(): void {
     this.cuenta.rut = localStorage.getItem("rut");
+    Swal.showLoading();
     this.get_cuenta();
-    this.get_datos_destino();
-    this.get_datos_origen();
   }
   get_cuenta() {
     this.data = [];
     this.cuenta_service.data_cuenta(this.cuenta).subscribe((resp) => {
       let cuentas: any = resp;
-
+      this.get_datos_origen();
       cuentas.map((cliente) => {
         this.data.push(cliente);
       });
@@ -46,6 +46,7 @@ export class HistorialComponent implements OnInit {
     this.origen = [];
     this.historia_service.datos_origen(this.cuenta.rut).subscribe((resp) => {
       let arreglo: any = resp;
+      this.get_datos_destino();
       arreglo.map((result) => this.origen.push(result));
     });
   }
@@ -54,7 +55,9 @@ export class HistorialComponent implements OnInit {
     this.destino = [];
     this.historia_service.datos_destino(this.cuenta.rut).subscribe((resp) => {
       let arreglo: any = resp;
+
       arreglo.map((result) => this.destino.push(result));
+      Swal.close();
     });
   }
 }

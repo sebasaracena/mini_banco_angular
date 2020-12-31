@@ -1,3 +1,9 @@
+#Servidor en la nube
+
+ presionar el siguiente link http://146.83.102.99/mini-banco/#/home
+
+ para back-end siguiente link http://146.83.102.99:8081 para cada consulta.
+
 # FrontEnd
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.4.

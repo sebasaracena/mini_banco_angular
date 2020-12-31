@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: "root",
 })
 export class CuentaService {
-  API_URL = "http://localhost:8080";
+  API_URL = "http://146.83.102.99:8081";
   constructor(private http: HttpClient) {}
 //logearse con su cuenta
   get_login(cuenta: any) {
