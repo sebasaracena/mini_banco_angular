@@ -1,8 +1,17 @@
-#Servidor en la nube
+# Servidor en la nube
 
  presionar el siguiente link http://146.83.102.99/mini-banco/#/home
 
  para back-end siguiente link http://146.83.102.99:8081 para cada consulta.
+
+# Usuarios creados en la base de datos
+## Usuario 1
+rut:16226517-2
+pass:Aracena2020
+
+## Usuario 2 
+rut:16091211-1
+pass:Aracena2020
 
 # FrontEnd
 
