@@ -22,7 +22,6 @@ export class OperacionesComponent implements OnInit {
     // llamando el servicio para extraer datos del usuario como su nombre
     this.cuenta_service.data_cuenta(this.sql_cuenta).subscribe((resp) => {
       let cuentas: any = resp;
-      console.log(resp);
       this.usuario = cuentas.map((cuenta) => cuenta.nombre);
       Swal.close();
     });
